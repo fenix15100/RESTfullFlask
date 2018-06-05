@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,render_template
 import os
 from app.Articulos import Articulos
 
@@ -22,8 +22,12 @@ def createapp():
         app.config.from_mapping(
             SQLALCHEMY_ECHO=False,
             DEBUG=False,
-            SECRET_KEY='dev'
+            SECRET_KEY='prod'
 
         )
+
+    @app.route('/')
+    def index():
+        return render_template("home.html")
 
     return app
