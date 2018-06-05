@@ -2,17 +2,15 @@ import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-project_dir = os.path.dirname(os.path.abspath(__file__))
-database_file = "sqlite:///{}".format(os.path.join(project_dir, "mydb.db"))
+
+# SHELL set FLASK_APP=app:createapp set FLASK_ENV=development or production
 def createapp():
 
     app = Flask(__name__)
 
     app = registerModels(config(app))
 
-    db = SQLAlchemy(app)
-
-    @app.route('/')
+    @app.route('/',methods=["GET"])
     def index():
         return render_template("home.html")
 
@@ -20,6 +18,7 @@ def createapp():
 
 
 def config(app):
+
     if os.environ['FLASK_ENV'] == 'development':
 
         app.config.from_mapping(
@@ -45,4 +44,10 @@ def registerModels(app):
     from app.Articulos import Articulos
 
     app.register_blueprint(Articulos)
+
     return app
+
+project_dir = os.path.dirname(os.path.abspath(__file__))
+database_file = "sqlite:///{}".format(os.path.join(project_dir, "mydb.db"))
+db = SQLAlchemy(createapp())
+
