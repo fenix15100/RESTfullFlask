@@ -1,53 +1,49 @@
 import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+from app.Controller import *
 
 
-# SHELL set FLASK_APP=app:createapp set FLASK_ENV=development or production
-def createapp():
-
-    app = Flask(__name__)
-
-    app = registerModels(config(app))
-
-    @app.route('/',methods=["GET"])
-    def index():
-        return render_template("home.html")
-
-    return app
 
 
-def config(app):
 
-    if os.environ['FLASK_ENV'] == 'development':
+#Load ENV system from file
+APP_ROOT = os.path.join(os.path.dirname(__file__), '..')
+dotenv_path = os.path.join(APP_ROOT, '.env')
+load_dotenv(dotenv_path)
 
-        app.config.from_mapping(
-            SQLALCHEMY_ECHO=True,
-            DEBUG=True,
-            SECRET_KEY='dev',
-            SQLALCHEMY_DATABASE_URI=database_file,
-            SQLALCHEMY_TRACK_MODIFICATIONS=True
+
+#Instance Flask App from ENV file
+app = Flask(__name__)
+
+app.config.from_mapping(
+            SQLALCHEMY_ECHO=os.getenv('SQLALCHEMY_ECHO'),
+            DEBUG=os.getenv('DEBUG'),
+            SECRET_KEY=os.getenv('SECRET_KEY'),
+            SQLALCHEMY_DATABASE_URI=os.getenv('SQLALCHEMY_DATABASE_URI'),
+            SQLALCHEMY_TRACK_MODIFICATIONS=os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
 
         )
-    elif os.environ['FLASK_ENV'] == 'production':
-        app.config.from_mapping(
-            SQLALCHEMY_ECHO=False,
-            DEBUG=False,
-            SECRET_KEY='prod',
-            SQLALCHEMY_DATABASE_URI=database_file,
-            SQLALCHEMY_TRACK_MODIFICATIONS=True
 
-        )
-    return app
+app.register_blueprint(main)
 
-def registerModels(app):
-    from app.Articulos import Articulos
+#Run app
+if __name__ == "__main__":
 
-    app.register_blueprint(Articulos)
+    app.run()
 
-    return app
 
-project_dir = os.path.dirname(os.path.abspath(__file__))
-database_file = "sqlite:///{}".format(os.path.join(project_dir, "mydb.db"))
-db = SQLAlchemy(createapp())
+
+
+
+
+
+
+
+
+
+
+
+
 
