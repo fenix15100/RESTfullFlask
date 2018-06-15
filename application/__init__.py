@@ -1,8 +1,8 @@
 import os
-from flask import Flask,render_template
+from flask import Flask
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
-
+from application.Controller import mainController,articulos
 
 
 #Load ENV system from file
@@ -13,10 +13,8 @@ dotenv_path = os.path.join(APP_ROOT, '.env')
 load_dotenv(dotenv_path)
 
 
-
 #Instance Flask App from ENV file
 app = Flask(__name__)
-
 
 app.config.from_mapping(
             SQLALCHEMY_ECHO=os.getenv('SQLALCHEMY_ECHO'),
@@ -27,26 +25,35 @@ app.config.from_mapping(
 
         )
 
+#BluePrints
+app.register_blueprint(mainController)
+app.register_blueprint(articulos)
 
+
+#####
 
 db=SQLAlchemy(app)
-class Articulos(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-
-
-    def __repr__(self):
-        return '<Name %r>' % self.name
 
 
 
+#Run app
+if __name__ == '__main__':
+    app.run()
 
-@app.route('/',methods=['GET'])
-def root():
 
-    return render_template('index.html')
 
-from .articulos.views import articulos_blue
 
-app.register_blueprint(articulos_blue)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
