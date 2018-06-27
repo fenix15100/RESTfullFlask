@@ -1,2 +1,2 @@
 # RESTfullFlask
-Pequeño Ejemplo de una API Rest Tokenizada, desarollada en Flask
+Edicational example Tokenized API and WebUI CRUD developed in Flask MicroFramework Python. 
