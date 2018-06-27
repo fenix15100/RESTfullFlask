@@ -15,10 +15,10 @@ app.config['SQLALCHEMY_ECHO']= True
 db=SQLAlchemy(app)
 
 
-from models import User
+from models import *
 
 
-dsdsdsdsd
+
 
 @app.route("/")
 def hello():
@@ -26,4 +26,6 @@ def hello():
 
 
 if __name__ == "__main__":
+    db.drop_all()
+    db.create_all()
     app.run()
