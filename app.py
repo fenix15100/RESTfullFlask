@@ -1,5 +1,5 @@
 import os
-from flask import Flask,render_template
+from flask import Flask,render_template,Blueprint
 from flask_sqlalchemy import SQLAlchemy
 
 app=Flask(__name__)
@@ -19,11 +19,29 @@ db=SQLAlchemy(app)
 
 from models import *
 
+#Declare my views
+
+oficinaController=Blueprint('oficinaController', __name__, url_prefix='/oficina')
+
+@oficinaController.route('/')
+def showAll():
+
+    oficinas=db.session.query(Oficina).all()
+
+    return render_template('oficina_list.html',oficinas=oficinas)
+
+
+#Register my views
+app.register_blueprint(oficinaController)
+
+
+
+
 
 
 #main view
 @app.route("/")
-def hello():
+def home():
     return render_template("index.html")
 
 #Entry Point for the app

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block head %}
+  {{ super() }}
+
+{% endblock %}
+{% block content %}
+    <h1>Lista de Oficinas</h1>
+    <table border="1">
+      <tr>
+           <th>ID</th>
+           <th>Ciudad</th>
+           <th>Region</th>
+           <th>Director</th>
+           <th>Objetivo</th>
+           <th>Ventas</th>
+           <th>Aciones</th>
+       </tr>
+    {% for oficina in oficinas %}
+       <tr>
+           <td> {{ oficina.id_oficina }}</td>
+           <td> {{ oficina.ciudad }}</td>
+           <td> {{ oficina.region }}</td>
+           <td> {{ oficina.director }}</td>
+           <td> {{ oficina.objetivo }}</td>
+           <td> {{ oficina.ventas }}</td>
+       <!--Añadir acciones de borrar y editar-->
+       </tr>
+
+    {% endfor %}
+    </table>
+{% endblock %}

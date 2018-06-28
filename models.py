@@ -20,7 +20,7 @@ class Producto(db.Model):
     existencias = db.Column(db.INTEGER,
                             CheckConstraint('existencias>=0'), nullable=False)
 
-    pedidos = db.relationship('pedido', backref='id_pedido', lazy=True)
+    pedidos = db.relationship('Pedido', backref='pedidos_producto', lazy=True)
 
     def __repr__(self):
         return '<Producto %r>' % self.id_fab + "_" + self.id_producto
@@ -41,7 +41,7 @@ class Oficina(db.Model):
     ventas = db.Column(db.DECIMAL(precision=9, scale=2),
                        CheckConstraint('ventas>=0'), nullable=False)
 
-    repventas = db.relationship('repventa', backref='id_oficina', lazy=True)
+    repventas = db.relationship('Repventa', backref='repventas_oficina', lazy=True)
 
     def __repr__(self):
         return '<Oficina %r>' % self.id_oficina + "_" + self.ciudad + "_" + self.region
@@ -73,12 +73,12 @@ class Repventa(db.Model):
     ventas = db.Column(db.DECIMAL(precision=8, scale=2),
                        CheckConstraint('ventas>=0'), nullable=False)
 
-    director = db.relationship('repventa', backref='subordinados',
+    director = db.relationship('Repventa', backref='subordinados',
                                remote_side=id_empleado)
 
-    clientes = db.relationship('cliente', backref='id_vendedor', lazy=True)
+    clientes = db.relationship('Cliente', backref='clientes_vendedor', lazy=True)
 
-    pedidos = db.relationship('pedido', backref='id_pedido', lazy=True)
+    pedidos = db.relationship('Pedido', backref='pedidos_vendedor', lazy=True)
 
     def __repr__(self):
         return '<Empleado %r>' % self.id_empleado + "_" + self.nombre
@@ -96,7 +96,7 @@ class Cliente(db.Model):
     limite_credito = db.Column(db.DECIMAL(precision=8, scale=2),
                                CheckConstraint('limite_credito>0 and limite_credito<120000'))
 
-    pedidos = db.relationship('pedido', backref='id_pedido', lazy=True)
+    pedidos = db.relationship('Pedido', backref='pedidos_cliente', lazy=True)
 
     def __repr__(self):
         return '<Cliente %r>' % self.id_cliente + "_" + self.empresa

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.main.css') }}">
+    <title>{% block title %}{% endblock %}CRUD UI Training DB</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div id="navigation_bar">
+        {% block nav %}
+            <div class="navbar">
+                <a href="{{ url_for('home') }}">Home</a>
+               <div class="dropdown">
+                    <button class="dropbtn">Oficinas
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('oficinaController.showAll') }}">Show All Oficinas</a>
+                    <a href="#">Add Oficina </a>
+                </div>
+               </div>
+            </div>
+        {% endblock %}
+
+    </div>
+
+    <div id="content">{% block content %}{% endblock %}</div>
+
+  </body>
+</html>
