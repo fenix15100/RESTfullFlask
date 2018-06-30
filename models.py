@@ -43,6 +43,14 @@ class Oficina(db.Model):
 
     repventas = db.relationship('Repventa', backref='repventas_oficina', lazy=True)
 
+    def __init__(self,ciudad,region,director,objetivo,ventas):
+        self.ciudad=ciudad
+        self.region=region
+        self.director=director
+        self.objetivo=objetivo
+        self.ventas=ventas
+
+
     def __repr__(self):
         return '<Oficina %r>' % self.id_oficina + "_" + self.ciudad + "_" + self.region
 

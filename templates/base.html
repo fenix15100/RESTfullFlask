@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.main.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>{% block title %}{% endblock %}CRUD UI Training DB</title>
     {% endblock %}
   </head>
@@ -19,7 +20,7 @@
                     </button>
                 <div class="dropdown-content">
                     <a href="{{ url_for('oficinaController.showAll') }}">Show All Oficinas</a>
-                    <a href="#">Add Oficina </a>
+                    <a href="{{ url_for('oficinaController.add') }}">Add Oficina </a>
                 </div>
                </div>
             </div>
@@ -27,7 +28,20 @@
 
     </div>
 
-    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="content">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
 
   </body>
 </html>

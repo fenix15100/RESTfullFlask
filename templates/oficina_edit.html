@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block head %}
+  {{ super() }}
+
+{% endblock %}
+{% block content %}
+    <h1>EDIT Oficina</h1>
+
+
+    <form action="{{ url_for('oficinaController.edit',id=id) }}?_method=PUT" method="POST">
+        {{ form.csrf_token }}
+        {% for field in form if not field.name=='csrf_token'%}
+        <p>
+            {% if field.type == "BooleanField" %}
+                <td></td>
+                <td>{{ field }} {{ field.label }}</td>
+            {% else %}
+
+                <td>{{ field.label }}{% if field.flags.required %}*{% endif %}</td>
+                <td>{{ field }}</td>
+            {% endif %}
+          <br>
+        {% endfor %}
+        <p><input type=submit value="Edit Oficina"></p>
+    </form>
+{% endblock %}

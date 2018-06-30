@@ -58,3 +58,11 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+
+.flashes{
+    background-color: greenyellow;
+    border-color: green;
+    border-style: dotted;
+    color: black;
+}
