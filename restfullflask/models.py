@@ -5,7 +5,7 @@
 
 from sqlalchemy import CheckConstraint,ForeignKeyConstraint
 
-from app import db
+from restfullflask import db
 
 
 class Producto(db.Model):
