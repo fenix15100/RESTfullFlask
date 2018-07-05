@@ -67,7 +67,7 @@ def edit(id):
         return redirect(url_for('oficinaController.showAll'))
 
 
-    form.ciudad.data = oficina.ciudad
+    form.ciudad.data = oficina.ciudad #TODO Implement method to populate form from object 
     form.region.data = oficina.region
     form.director.data = oficina.director
     form.objetivo.data = oficina.objetivo
