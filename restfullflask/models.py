@@ -1,7 +1,9 @@
-#This module contains all models used by application
-#If need more information related to declaring models go here
-#http://flask-sqlalchemy.pocoo.org/2.3/models/#one-to-many-relationships
-#http://docs.sqlalchemy.org/en/latest/orm/
+"""
+This module contains all models used by application
+If need more information related to declaring models go here
+http://flask-sqlalchemy.pocoo.org/2.3/models/#one-to-many-relationships
+http://docs.sqlalchemy.org/en/latest/orm/
+"""
 
 from sqlalchemy import CheckConstraint,ForeignKeyConstraint
 
@@ -43,13 +45,20 @@ class Oficina(db.Model):
 
     repventas = db.relationship('Repventa', backref='repventas_oficina', lazy=True)
 
-    def __init__(self,ciudad,region,director,objetivo,ventas):
-        self.ciudad=ciudad
-        self.region=region
-        self.director=director
-        self.objetivo=objetivo
-        self.ventas=ventas
 
+    """
+    Instance model Oficina from fields of form
+    """
+    def handleForm(self,form):
+        self.ciudad = form.ciudad.data
+        self.region = form.region.data
+        self.director = form.director.data
+        self.objetivo = form.objetivo.data
+        self.ventas = form.ventas.data
+
+    """
+    Represent object en String Format
+    """
 
     def __repr__(self):
         return '<Oficina %r>' % self.id_oficina + "_" + self.ciudad + "_" + self.region

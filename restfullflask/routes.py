@@ -10,14 +10,17 @@ from flask import render_template,Blueprint,request,redirect,flash,url_for
 from restfullflask.models import *
 from restfullflask.forms import *
 
-###Main  Blueprint----------------------------------------------------------
+"""
+Main BluePrint
+"""
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-
-###BluePrint Oficina---------------------------------------------------------
+"""
+Oficina BluePrint
+"""
 
 oficinaController = Blueprint('oficinaController', __name__)
 
@@ -39,8 +42,8 @@ def add():
 
     if request.method=='POST':
 
-        oficina = Oficina(form.ciudad.data, form.region.data,
-                    form.director.data,form.objetivo.data,form.ventas.data)
+        oficina = Oficina()
+        oficina.handleForm(form)
         db.session.add(oficina)
         db.session.commit()
         flash('Oficina Added!')
@@ -57,21 +60,14 @@ def edit(id):
     form = OficinaForm(request.form)
 
     if request.method==b"PUT":
-        oficina.ciudad=form.ciudad.data
-        oficina.region=form.region.data
-        oficina.director=form.director.data
-        oficina.objetivo=form.objetivo.data
-        oficina.ventas=form.ventas.data
+
+        oficina.handleForm(form)
         db.session.commit()
         flash('Oficina Updated!')
         return redirect(url_for('oficinaController.showAll'))
 
-
-    form.ciudad.data = oficina.ciudad #TODO Implement method to populate form from object 
-    form.region.data = oficina.region
-    form.director.data = oficina.director
-    form.objetivo.data = oficina.objetivo
-    form.ventas.data = oficina.ventas
+    # Set fields from a Model Oficina
+    form.populateForm(oficina)
 
     return render_template('oficina_edit.html', form=form,id=id)
 
@@ -89,3 +85,8 @@ def delete(id):
 
 #Register blueprint oficina
 app.register_blueprint(oficinaController)
+
+
+"""
+Producto BluePrint
+"""
