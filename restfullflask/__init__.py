@@ -18,9 +18,10 @@ app.config['SECRET_KEY']= str(secrets.token_hex(16))
 #Override HTTPMethods
 modus = Modus(app)
 
-#Bind models of the app in ORM SQLAlchemy
+#init ORM SQLAlchemy
 db=SQLAlchemy(app)
 
 #My Logic
 from restfullflask import routes
+
 
