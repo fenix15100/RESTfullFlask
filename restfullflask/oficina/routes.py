@@ -43,7 +43,7 @@ def edit(id):
     oficina=db.session.query(Oficina).get(id)
     form = OficinaForm(request.form)
 
-    if request.method==b"PUT":
+    if request.method==b"PUT" and form.validate():
 
         oficina.handleForm(form)
         db.session.commit()

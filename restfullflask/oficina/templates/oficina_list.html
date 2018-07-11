@@ -7,6 +7,7 @@
     {{ super() }}
     <h1>Lista de Oficinas</h1>
 
+
     <table class="table table-striped">
       <tr>
            <th>ID</th>
@@ -30,11 +31,12 @@
                <form  style="display: inline;"method=POST action="{{ url_for('oficinaController.delete',id=oficina.id_oficina) }}?_method=DELETE">
                    <input  class="btn btn-danger " type="submit" value="Borrar">
                </form></td>
-       <!--Añadir acciones de borrar y editar-->
+
        </tr>
 
     {% endfor %}
     </table>
+
     <br>
      <a  class="btn btn-info" href="{{ url_for('oficinaController.add') }}">Add Oficina</a>
 {% endblock %}

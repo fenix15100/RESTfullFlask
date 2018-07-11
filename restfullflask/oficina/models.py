@@ -30,7 +30,7 @@ class Oficina(db.Model):
         self.ventas = form.ventas.data
 
     """
-    Represent object en String Format
+    Represent object in String Format
     """
 
     def __repr__(self):
