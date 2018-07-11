@@ -1,13 +1,13 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField,IntegerField,DecimalField,validators
+from restfullflask.HelpersScripts.wtfhtml5 import IntegerField,DecimalField
+from wtforms import Form,StringField,validators
 
 
-class OficinaForm(FlaskForm):
-    ciudad = StringField('Ciudad', [validators.Length(max=15),validators.input_required])
-    region = StringField('Region', [validators.Length(max=10),validators.input_required])
+class OficinaForm(Form):
+    ciudad = StringField('Ciudad', validators=[validators.Length(max=15,message="Como maximo 15 Caracteres"),validators.DataRequired("Introduce una Ciudad")])
+    region = StringField('Region', validators=[validators.Length(max=10,message="Como maximo 10 Caracteres"),validators.DataRequired("Introduce una Región")])
     director = IntegerField('Director')
-    objetivo= DecimalField('Objetivo') #,[validators.number_range(max=9),validators.input_required],places=2
-    ventas = DecimalField('Ventas') #, [validators.number_range(max=9),validators.input_required], places=2
+    objetivo= DecimalField('Objetivo',validators=[validators.DataRequired("Numero decimal Requerido")],places=2)
+    ventas = DecimalField('Ventas',validators=[validators.DataRequired("Numero Decimal requerido")],places=2)
 
     #Set fields from a Model Oficina
 

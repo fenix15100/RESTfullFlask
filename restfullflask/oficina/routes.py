@@ -24,7 +24,7 @@ def add():
     #Render a valid HTML5 form for handle data to Add a new entry "Oficina"
     form = OficinaForm(request.form)
 
-    if request.method=='POST':
+    if request.method == 'POST' and form.validate():
 
         oficina = Oficina()
         oficina.handleForm(form)

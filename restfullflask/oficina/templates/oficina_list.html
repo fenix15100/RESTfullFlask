@@ -4,9 +4,10 @@
 
 {% endblock %}
 {% block content %}
+    {{ super() }}
     <h1>Lista de Oficinas</h1>
 
-    <table border="1">
+    <table class="table table-striped">
       <tr>
            <th>ID</th>
            <th>Ciudad</th>
@@ -24,10 +25,10 @@
            <td> {{ oficina.director }}</td>
            <td> {{ oficina.objetivo }}</td>
            <td> {{ oficina.ventas }}</td>
-           <td><a href="{{ url_for('oficinaController.edit',id=oficina.id_oficina) }}">Editar</a>
-               <form method=POST action="{{ url_for('oficinaController.delete',id=oficina.id_oficina) }}?_method=DELETE">
-                   <input type="hidden" name="_method" value="DELETE" />
-                   <input type="submit" value="Borrar">
+           <td><a  class="btn btn-warning" href="{{ url_for('oficinaController.edit',id=oficina.id_oficina) }}">Editar</a>
+
+               <form  style="display: inline;"method=POST action="{{ url_for('oficinaController.delete',id=oficina.id_oficina) }}?_method=DELETE">
+                   <input  class="btn btn-danger " type="submit" value="Borrar">
                </form></td>
        <!--Añadir acciones de borrar y editar-->
        </tr>
@@ -35,5 +36,5 @@
     {% endfor %}
     </table>
     <br>
-     <a href="{{ url_for('oficinaController.add') }}">Add Oficina</a>
+     <a  class="btn btn-info" href="{{ url_for('oficinaController.add') }}">Add Oficina</a>
 {% endblock %}

@@ -3,6 +3,7 @@ import secrets
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
+from flask_bootstrap import Bootstrap
 
 
 app=Flask(__name__)
@@ -17,6 +18,9 @@ app.config['SECRET_KEY']= str(secrets.token_hex(16))
 
 #Override HTTPMethods
 modus = Modus(app)
+
+#Bootstrap vendor
+Bootstrap(app)
 
 #init ORM SQLAlchemy
 db=SQLAlchemy(app)

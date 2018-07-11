@@ -4,23 +4,38 @@
 
 {% endblock %}
 {% block content %}
-    <h1>EDIT Oficina</h1>
+    {{ super() }}
 
 
-    <form action="{{ url_for('oficinaController.edit',id=id) }}?_method=PUT" method="POST">
-        {{ form.csrf_token }}
-        {% for field in form if not field.name=='csrf_token'%}
-        <p>
-            {% if field.type == "BooleanField" %}
-                <td></td>
-                <td>{{ field }} {{ field.label }}</td>
-            {% else %}
 
-                <td>{{ field.label }}{% if field.flags.required %}*{% endif %}</td>
-                <td>{{ field }}</td>
-            {% endif %}
-          <br>
-        {% endfor %}
-        <p><input type=submit value="Edit Oficina"></p>
+    <form action="{{ url_for('oficinaController.edit',id=id) }}?_method=PUT" method="POST" class="form form-horizontal" role="form" style="margin-left: 20%;">
+        <h1>Editar Oficina</h1>
+        <div class="form-group">
+           <div class="col-md-3">
+            {{ form.csrf_token }}
+            {% for field in form if not field.name=='csrf_token'%}
+
+
+                {% if field.type == "BooleanField" %}
+                    <td></td>
+                    <td>{{ field(class="form-control input-md") }} {{ field.label }}</td>
+                {% else %}
+
+                    <td>{{ field.label }}{% if field.flags.required %}<span id="requerido">*</span>{% endif %}</td>
+                    <td>{{ field(class="form-control input-md") }}</td>
+                {% endif %}
+
+                {% if field.errors %}
+                    <ul class="alert alert-warning">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+              <br>
+            {% endfor %}
+           <input  class="btn btn-success form-control" type=submit value="Add Oficina">
+           </div>
+        </div>
     </form>
 {% endblock %}

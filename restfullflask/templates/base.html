@@ -1,47 +1,65 @@
-<!doctype html>
-<html>
-  <head>
+{% extends "bootstrap/base.html" %}
+
     {% block head %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.main.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <title>{% block title %}{% endblock %}CRUD UI Training DB</title>
+        {{ super() }}
     {% endblock %}
-  </head>
-  <body>
-    <div id="navigation_bar">
-        {% block nav %}
-            <div class="navbar">
-                <a href="{{ url_for('home') }}">Home</a>
-               <div class="dropdown">
-                    <button class="dropbtn">Oficinas
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                <div class="dropdown-content">
-                    <a href="{{ url_for('oficinaController.showAll') }}">Show All Oficinas</a>
-                    <a href="{{ url_for('oficinaController.add') }}">Add Oficina </a>
-                </div>
-               </div>
+
+
+
+
+    {% block content %}
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="https://github.com/fenix15100/RESTfullFlask" target="_blank">RestFullFlask</a>
             </div>
-        {% endblock %}
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Oficinas <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ url_for('oficinaController.showAll') }}">Ver Oficinas</a></li>
+                    <li><a href="{{ url_for('oficinaController.add') }}">Añadir Oficina</a></li>
 
-    </div>
 
-    <div id="content">
+                     <!--<li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>-->
+                  </ul>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Login</a></li>
+
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+
+        <br>
+        <br>
+        <br>
+
+
+
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <ul class=flashes>
+                <ul class="alert alert-info">
                 {% for message in messages %}
                     <li>{{ message }}</li>
                 {% endfor %}
                 </ul>
             {% endif %}
         {% endwith %}
+    {% endblock %}
 
-        {% block content %}
-        {% endblock %}
-    </div>
 
-  </body>
-</html>
