@@ -27,14 +27,17 @@
                   <ul class="dropdown-menu">
                     <li><a href="{{ url_for('oficinaController.showAll') }}">Ver Oficinas</a></li>
                     <li><a href="{{ url_for('oficinaController.add') }}">Añadir Oficina</a></li>
-
-
-                     <!--<li role="separator" class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>-->
                   </ul>
                 </li>
+
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ url_for('productoController.showAll') }}">Ver Productos</a></li>
+                    <li><a href="{{ url_for('productoController.add') }}">Añadir Producto</a></li>
+                  </ul>
+                </li>
+
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Register</a></li>

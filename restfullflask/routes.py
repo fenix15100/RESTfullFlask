@@ -22,3 +22,6 @@ from restfullflask.models import *
 
 from restfullflask.oficina.routes import oficinaController
 app.register_blueprint(oficinaController)
+
+from restfullflask.producto.routes import productoController
+app.register_blueprint(productoController)

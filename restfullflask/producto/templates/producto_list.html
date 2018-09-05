@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block head %}
+  {{ super() }}
+
+{% endblock %}
+{% block content %}
+    {{ super() }}
+    <h1>Lista de Productos</h1>
+
+
+    <table class="table table-striped">
+      <tr>
+           <th>Fabricante</th>
+           <th>Codigo Producto</th>
+           <th>Descripción</th>
+           <th>Precio</th>
+           <th>Existencias</th>
+           <th>Acciones</th>
+       </tr>
+    {% for producto in productos %}
+       <tr>
+           <td> {{ producto.id_fab }}</td>
+           <td> {{ producto.id_producto }}</td>
+           <td> {{ producto.descripcion }}</td>
+           <td> {{ producto.precio }}</td>
+           <td> {{ producto.existencias }}</td>
+           <td><a  class="btn btn-warning" href="{{ url_for('productoController.edit',id_fab=producto.id_fab,id_producto=producto.id_producto) }}">Editar</a>
+
+               <form  style="display: inline;"method=POST action="{{ url_for('productoController.delete',id_fab=producto.id_fab,id_producto=producto.id_producto) }}?_method=DELETE">
+                   <input  class="btn btn-danger " type="submit" value="Borrar">
+               </form></td>
+
+       </tr>
+
+    {% endfor %}
+    </table>
+
+    <br>
+     <a  class="btn btn-info" href="{{ url_for('productoController.add') }}">Add Producto</a>
+{% endblock %}
