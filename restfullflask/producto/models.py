@@ -2,6 +2,7 @@ from restfullflask import db
 from sqlalchemy import CheckConstraint,ForeignKeyConstraint
 
 class Producto(db.Model):
+
     id_fab = db.Column(db.String(3), primary_key=True)
 
     id_producto = db.Column(db.String(3), primary_key=True)

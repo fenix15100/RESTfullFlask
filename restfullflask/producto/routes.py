@@ -35,9 +35,10 @@ def add():
             db.session.commit()
             flash('Producto Added!')
             return redirect(url_for('productoController.showAll'))
-        except IntegrityError:
+        except IntegrityError as e:
             db.session.rollback()
-            form.id_fab.errors.append("Ya hay un producto con la misma combinacion de Codigo de Fabricante y Codigo de Producto")
+            flash(e)
+
 
 
     return render_template('producto_add.html', form=form)
@@ -56,10 +57,9 @@ def edit(id_fab,id_producto):
             db.session.commit()
             flash('Producto Updated!')
             return redirect(url_for('productoController.showAll'))
-        except IntegrityError:
+        except IntegrityError as e:
             db.session.rollback()
-            form.id_fab.errors.append("Ya hay un producto con la misma combinacion de Codigo de Fabricante y Codigo de Producto")
-
+            flash(e)
 
     form.populateForm(producto)
 
