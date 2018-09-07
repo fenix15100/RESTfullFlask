@@ -7,20 +7,20 @@ class ProductoForm(Form):
 
     id_fab = StringField('Cod.Fabricante',
                          validators=[validators.Length(max=3, message="Como maximo 3 Caracteres alfanumericos"),
-                                     validators.DataRequired("Introduce un Codigo de fabricante")])
+                                     validators.InputRequired("Introduce un Codigo de fabricante")])
 
     id_producto = StringField('Cod.Producto',
                               validators=[validators.Length(max=3, message="Como maximo 3 Caracteres alfanumericos"),
-                                          validators.DataRequired("Introduce un Codigo de Producto")])
+                                          validators.InputRequired("Introduce un Codigo de Producto")])
 
     descripcion = TextAreaField('Descripcion',
-                                validators=[validators.DataRequired('Es necesaria una descripcion del producto')])
+                                validators=[validators.InputRequired('Es necesaria una descripcion del producto')])
 
     precio = DecimalField('Precio',
-                          validators=[validators.DataRequired("Precio requerido"), validators.NumberRange(min=1)],
+                          validators=[validators.InputRequired("Precio requerido"), validators.NumberRange(min=1)],
                           places=2)
 
-    existencias = IntegerField('Exsitencias', validators=[validators.DataRequired("Campo obligatorio"),
+    existencias = IntegerField('Exsitencias', validators=[validators.InputRequired("Campo obligatorio"),
                                                           validators.NumberRange(min=0,
                                                                                  message="La existencias no pueden "
                                                                                          "ser inferior a 0")])
