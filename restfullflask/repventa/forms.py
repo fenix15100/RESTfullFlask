@@ -1,9 +1,10 @@
 import datetime
 
-from restfullflask.HelpersScripts.wtfhtml5 import IntegerField,DateRange,DateField
+from restfullflask.HelpersScripts.wtfhtml5 import IntegerField, DateRange, DateField
 from wtforms import Form, StringField, SelectField, validators
 from restfullflask.repventa.models import Repventa
 from restfullflask.oficina.models import Oficina, db
+
 
 # TODO Finish Form
 class RepventaForm(Form):
@@ -15,20 +16,18 @@ class RepventaForm(Form):
 
     edad = IntegerField(label="Edad", validators=[validators.NumberRange(min=19, message="Debe ser mayor de 18 años")])
 
-    # TODO fix dinamic selectquery
+    # TODO fix dinamic selectquery avoid bug when add new oficina and implemnt null value por input
     id_oficina = SelectField(label="Oficina", choices=[(oficina.id_oficina, oficina.ciudad) for oficina in
                                                        db.session.query(Oficina).all()], coerce=int)
 
-    titulo = StringField(label="Titulo", validators=[validators.Length(max=10,message="Maximo 10 Caracteres")])
+    titulo = StringField(label="Titulo", validators=[validators.Length(max=10, message="Maximo 10 Caracteres")])
 
     contrato = DateField(label="Fecha", validators=[validators.DataRequired("Es necesaria una fecha de contrato"),
-                                                    DateRange(min=datetime.datetime.strptime('1800-01-01', "%Y-%m-%d").date(),
-                                                              max=datetime.datetime.now().date(),)],
+                                                    DateRange(
+                                                        min=datetime.datetime.strptime('1800-01-01', "%Y-%m-%d").date(),
+                                                        max=datetime.datetime.now().date(), )],
                          default=datetime.datetime.now().date())
-
-
 
     # TODO Implement method
     def populateform(self, repventa: Repventa):
         pass
-
