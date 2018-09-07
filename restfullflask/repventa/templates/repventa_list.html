@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block head %}
+  {{ super() }}
+
+{% endblock %}
+{% block content %}
+    {{ super() }}
+    <h1>Lista de Oficinas</h1>
+
+
+    <table class="table table-striped">
+      <tr>
+           <th>ID</th>
+           <th>Ciudad</th>
+           <th>Region</th>
+           <th>Director</th>
+           <th>Objetivo</th>
+           <th>Ventas</th>
+           <th>Aciones</th>
+       </tr>
+    {% for oficina in oficinas %}
+       <tr>
+           <td> {{ oficina.id_oficina }}</td>
+           <td> {{ oficina.ciudad }}</td>
+           <td> {{ oficina.region }}</td>
+           <td> {{ oficina.director }}</td>
+           <td> {{ oficina.objetivo }}</td>
+           <td> {{ oficina.ventas }}</td>
+           <td><a  class="btn btn-warning" href="{{ url_for('oficinaController.edit',id_oficina=oficina.id_oficina) }}">Editar</a>
+
+               <form  style="display: inline;"method=POST action="{{ url_for('oficinaController.delete',id_oficina=oficina.id_oficina) }}?_method=DELETE">
+                   <input  class="btn btn-danger " type="submit" value="Borrar">
+               </form></td>
+
+       </tr>
+
+    {% endfor %}
+    </table>
+
+    <br>
+     <a  class="btn btn-info" href="{{ url_for('oficinaController.add') }}">Add Oficina</a>
+{% endblock %}

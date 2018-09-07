@@ -8,9 +8,10 @@ http://flask.pocoo.org/docs/1.0/blueprints/
 from restfullflask import app
 from flask import render_template
 # noinspection PyUnresolvedReferences
-from restfullflask.models import Repventa, Cliente, Pedido
+from restfullflask.models import Cliente, Pedido
 from restfullflask.oficina.routes import oficinaController
 from restfullflask.producto.routes import productoController
+from restfullflask.repventa.routes import repventaController
 
 """
 Main BluePrint
@@ -25,3 +26,5 @@ def home():
 app.register_blueprint(oficinaController)
 
 app.register_blueprint(productoController)
+
+app.register_blueprint(repventaController)
