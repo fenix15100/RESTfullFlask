@@ -1,5 +1,4 @@
 from sqlalchemy import CheckConstraint
-
 from restfullflask import db
 
 
@@ -41,11 +40,24 @@ class Repventa(db.Model):
         self.id_empleado = form.id_empleado.data
         self.nombre = form.nombre.data
         self.edad = form.edad.data
-        self.id_oficina = form.id_oficina.data
+
+        if form.id_oficina.data == -1:
+            pass
+
+        else:
+            self.id_oficina = form.id_oficina.data
+
         self.titulo = form.titulo.data
         self.contrato = form.contrato.data
-        self.id_director = form.id_director.data
+
+        if form.id_director.data == -1:
+            pass
+
+        else:
+            self.id_director = form.id_director.data
+
         self.cuota = form.cuota.data
         self.ventas = form.ventas.data
+
     def __repr__(self):
         return '<Empleado %r>' % self.id_empleado + "_" + self.nombre
