@@ -1,8 +1,8 @@
 from restfullflask import db
-from sqlalchemy import CheckConstraint,ForeignKeyConstraint
+from sqlalchemy import CheckConstraint
+
 
 class Producto(db.Model):
-
     id_fab = db.Column(db.String(3), primary_key=True)
 
     id_producto = db.Column(db.String(3), primary_key=True)
@@ -20,7 +20,7 @@ class Producto(db.Model):
         Instance model Producto from fields of form
         """
 
-    def handleForm(self, form):
+    def handle_form(self, form):
         self.id_fab = form.id_fab.data
         self.id_producto = form.id_producto.data
         self.descripcion = form.descripcion.data

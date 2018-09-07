@@ -1,6 +1,7 @@
 from restfullflask import db
 from sqlalchemy import CheckConstraint
 
+
 class Oficina(db.Model):
     id_oficina = db.Column(db.INTEGER, primary_key=True)
 
@@ -18,11 +19,11 @@ class Oficina(db.Model):
 
     repventas = db.relationship('Repventa', backref='repventas_oficina', lazy=True)
 
-
     """
     Instance model Oficina from fields of form
     """
-    def handleForm(self,form):
+
+    def handle_form(self, form):
         self.ciudad = form.ciudad.data
         self.region = form.region.data
         self.director = form.director.data

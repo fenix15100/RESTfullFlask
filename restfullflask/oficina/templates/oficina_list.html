@@ -26,9 +26,9 @@
            <td> {{ oficina.director }}</td>
            <td> {{ oficina.objetivo }}</td>
            <td> {{ oficina.ventas }}</td>
-           <td><a  class="btn btn-warning" href="{{ url_for('oficinaController.edit',id=oficina.id_oficina) }}">Editar</a>
+           <td><a  class="btn btn-warning" href="{{ url_for('oficinaController.edit',id_oficina=oficina.id_oficina) }}">Editar</a>
 
-               <form  style="display: inline;"method=POST action="{{ url_for('oficinaController.delete',id=oficina.id_oficina) }}?_method=DELETE">
+               <form  style="display: inline;"method=POST action="{{ url_for('oficinaController.delete',id_oficina=oficina.id_oficina) }}?_method=DELETE">
                    <input  class="btn btn-danger " type="submit" value="Borrar">
                </form></td>
 
