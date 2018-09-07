@@ -6,7 +6,6 @@ from restfullflask.repventa.models import Repventa, db
 from restfullflask.oficina.models import Oficina
 
 
-# TODO fix issue wtf form convert 0 integer value to False Boolean  and cause error in server validation
 class RepventaForm(Form):
     id_empleado = IntegerField(label="ID",
                                validators=[validators.InputRequired("Se debe especificar un ID para el empleado")])

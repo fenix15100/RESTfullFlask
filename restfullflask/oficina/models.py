@@ -35,4 +35,4 @@ class Oficina(db.Model):
     """
 
     def __repr__(self):
-        return '<Oficina %r>' % self.id_oficina + "_" + self.ciudad + "_" + self.region
+        return 'Oficina {} {}'.format(self.id_oficina,self.ciudad)

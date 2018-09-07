@@ -29,8 +29,9 @@ class Repventa(db.Model):
                        CheckConstraint('ventas>=0'), nullable=False)
 
     # One Repventas to many relationship
+    # TODO Fix
     director = db.relationship('Repventa', backref='vendedores_vendedor',
-                               remote_side=id_empleado)
+                               remote_side=id_empleado,lazy=True)
 
     clientes = db.relationship('Cliente', backref='clientes_vendedor', lazy=True)
 
@@ -60,4 +61,4 @@ class Repventa(db.Model):
         self.ventas = form.ventas.data
 
     def __repr__(self):
-        return '<Empleado %r>' % self.id_empleado + "_" + self.nombre
+        return 'Empleado {} {}'.format(self.id_empleado,self.nombre)

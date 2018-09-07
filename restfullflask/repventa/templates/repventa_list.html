@@ -5,30 +5,47 @@
 {% endblock %}
 {% block content %}
     {{ super() }}
-    <h1>Lista de Oficinas</h1>
+    <h1>Lista de Repventas</h1>
 
 
     <table class="table table-striped">
       <tr>
            <th>ID</th>
-           <th>Ciudad</th>
-           <th>Region</th>
+           <th>Nombre</th>
+           <th>Edad</th>
+           <th>Oficina</th>
+           <th>Titulo</th>
+           <th>Contrato</th>
            <th>Director</th>
-           <th>Objetivo</th>
+           <th>Subordinados</th>
+           <th>Cuota</th>
            <th>Ventas</th>
-           <th>Aciones</th>
-       </tr>
-    {% for oficina in oficinas %}
-       <tr>
-           <td> {{ oficina.id_oficina }}</td>
-           <td> {{ oficina.ciudad }}</td>
-           <td> {{ oficina.region }}</td>
-           <td> {{ oficina.director }}</td>
-           <td> {{ oficina.objetivo }}</td>
-           <td> {{ oficina.ventas }}</td>
-           <td><a  class="btn btn-warning" href="{{ url_for('oficinaController.edit',id_oficina=oficina.id_oficina) }}">Editar</a>
+           <th>Acciones</th>
 
-               <form  style="display: inline;"method=POST action="{{ url_for('oficinaController.delete',id_oficina=oficina.id_oficina) }}?_method=DELETE">
+       </tr>
+    {% for repventa in repventas %}
+       <tr>
+           <td> {{ repventa.id_empleado }}</td>
+           <td> {{ repventa.nombre }}</td>
+           <td> {{ repventa.edad }}</td>
+           <td> {{ repventa.repventas_oficina }}</td>
+           <td> {{ repventa.titulo }}</td>
+           <td> {{ repventa.contrato }}</td>
+           <td> {{ repventa.director }}</td>
+
+           <td> <select title="subordinados">
+                  {% for subordinado in  repventa.vendedores_vendedor %}
+                    <option value="{{ subordinado.id_empleado }}">{{subordinado}}</option>
+
+                  {% endfor %}
+                </select>
+           </td>
+
+           <td> {{ repventa.cuota }}</td>
+           <td> {{ repventa.ventas }}</td>
+           <td><a  class="btn btn-warning" href="#">Editar</a>
+
+               <form  style="display: inline;"method=POST action="#">
                    <input  class="btn btn-danger " type="submit" value="Borrar">
                </form></td>
 
@@ -38,5 +55,5 @@
     </table>
 
     <br>
-     <a  class="btn btn-info" href="{{ url_for('oficinaController.add') }}">Add Oficina</a>
+     <a  class="btn btn-info" href="{{ url_for('repventaController.add') }}">Add Repventa</a>
 {% endblock %}

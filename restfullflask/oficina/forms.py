@@ -4,13 +4,20 @@ from wtforms import Form, StringField, validators
 
 
 class OficinaForm(Form):
-    ciudad = StringField('Ciudad', validators=[validators.Length(max=15, message="Como maximo 15 Caracteres"),
+    ciudad = StringField(label='Ciudad', validators=[validators.Length(max=15, message="Como maximo 15 Caracteres"),
                                                validators.InputRequired("Introduce una Ciudad")])
-    region = StringField('Region', validators=[validators.Length(max=10, message="Como maximo 10 Caracteres"),
+
+    region = StringField(label='Region', validators=[validators.Length(max=10, message="Como maximo 10 Caracteres"),
                                                validators.InputRequired("Introduce una Región")])
-    director = IntegerField('Director')
-    objetivo = DecimalField('Objetivo', validators=[validators.InputRequired("Numero decimal Requerido")], places=2)
-    ventas = DecimalField('Ventas', validators=[validators.InputRequired("Numero Decimal requerido")], places=2)
+    director = IntegerField(label='Director')
+
+    objetivo = DecimalField(label='Objetivo', validators=[validators.InputRequired("Campo requerido"),
+                                                    validators.NumberRange(min=0, message="El valor tiene que ser mayor o igual a 0")],
+                            places=2)
+
+    ventas = DecimalField(label='Ventas', validators=[validators.InputRequired("Numero Decimal requerido"),
+                                                validators.NumberRange(min=0, message="El valor tiene que ser mayor o igual a 0")],
+                          places=2)
 
     # Set fields from a Model Oficina
 
