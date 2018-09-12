@@ -7,29 +7,29 @@ class Repventa(db.Model):
 
     nombre = db.Column(db.String(15), nullable=False)
 
-    edad = db.Column(db.INTEGER, CheckConstraint('edad>18'))
+    edad = db.Column(db.INTEGER, CheckConstraint('edad>18',name='chk_repventas_edad'))
 
     id_oficina = db.Column(db.INTEGER,
-                           db.ForeignKey('oficina.id_oficina',
-                                         ondelete="SET NULL", onupdate="CASCADE"))
+                           db.ForeignKey('oficina.id_oficina',name='fk_repventas_id_oficina_oficina',
+                                         ondelete="SET NULL", onupdate="CASCADE",deferrable=True))
 
     titulo = db.Column(db.String(10))
 
     contrato = db.Column(db.DATE,
-                         CheckConstraint('contrato<=current_timestamp'), nullable=False)
+                         CheckConstraint('contrato<=current_timestamp',name='chk_repventas_contrato'), nullable=False)
 
     id_director = db.Column(db.INTEGER,
-                            db.ForeignKey("repventa.id_empleado",
-                                          ondelete="RESTRICT", onupdate="CASCADE"))
+                            db.ForeignKey("repventa.id_empleado",name='fk_repventas_director_repventas',
+                                          ondelete="RESTRICT", onupdate="CASCADE",deferrable=True))
 
     cuota = db.Column(db.DECIMAL(precision=8, scale=2),
-                      CheckConstraint('cuota>=0'))
+                      CheckConstraint('cuota>=0',name='chk_repventas_cuota'))
 
     ventas = db.Column(db.DECIMAL(precision=8, scale=2),
-                       CheckConstraint('ventas>=0'), nullable=False)
+                       CheckConstraint('ventas>=0',name='chk_epventas_ventas'), nullable=False,)
 
     # One Repventas to many relationship
-    # TODO Fix
+
     director = db.relationship('Repventa', backref='vendedores_vendedor',
                                remote_side=id_empleado,lazy=True)
 
@@ -59,6 +59,15 @@ class Repventa(db.Model):
 
         self.cuota = form.cuota.data
         self.ventas = form.ventas.data
+
+    def isdirector(self)->bool:
+        check=db.session.query(Repventa).filter_by(id_director=self.id_empleado).first()
+
+        if check is None:
+            return False
+        else:
+            return True
+
 
     def __repr__(self):
         return 'Empleado {} {}'.format(self.id_empleado,self.nombre)

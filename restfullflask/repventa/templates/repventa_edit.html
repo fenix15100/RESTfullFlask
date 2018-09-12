@@ -8,8 +8,8 @@
 
 
 
-    <form action="{{ url_for('oficinaController.edit',id_oficina=id_oficina) }}?_method=PUT" method="POST" class="form form-horizontal" role="form" style="margin-left: 20%;">
-        <h1>Editar Oficina</h1>
+    <form action="{{ url_for('repventaController.edit',id_empleado=id_empleado) }}?_method=PUT" method="POST" class="form form-horizontal" role="form" style="margin-left: 20%;">
+        <h1>Editar Repventa</h1>
         <div class="form-group">
            <div class="col-md-3">
             {{ form.csrf_token }}
@@ -34,7 +34,7 @@
                 {% endif %}
               <br>
             {% endfor %}
-           <input  class="btn btn-success form-control" type=submit value="Edit Oficina">
+           <input  class="btn btn-success form-control" type=submit value="Edit Repventa">
            </div>
         </div>
     </form>

@@ -43,9 +43,9 @@
 
            <td> {{ repventa.cuota }}</td>
            <td> {{ repventa.ventas }}</td>
-           <td><a  class="btn btn-warning" href="#">Editar</a>
+           <td><a  class="btn btn-warning" href="{{url_for('repventaController.edit',id_empleado=repventa.id_empleado)}}">Editar</a>
 
-               <form  style="display: inline;"method=POST action="#">
+               <form  style="display: inline;"method=POST action="{{url_for('repventaController.delete',id_empleado=repventa.id_empleado)}}?_method=DELETE">
                    <input  class="btn btn-danger " type="submit" value="Borrar">
                </form></td>
 

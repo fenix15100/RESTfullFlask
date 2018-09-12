@@ -28,4 +28,4 @@ class Producto(db.Model):
         self.existencias = form.existencias.data
 
     def __repr__(self):
-        return 'Producto {} {}'.format(self.id_fab,self.id_producto)
+        return 'Producto {} {}'.format(self.id_fab, self.id_producto)
