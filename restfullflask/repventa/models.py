@@ -33,9 +33,9 @@ class Repventa(db.Model):
     director = db.relationship('Repventa', backref='vendedores_vendedor',
                                remote_side=id_empleado,lazy=True)
 
-    clientes = db.relationship('Cliente', backref='clientes_vendedor', lazy=True)
+    cliente = db.relationship('Cliente', backref='clientes_vendedor', lazy=True)
 
-    pedidos = db.relationship('Pedido', backref='pedidos_vendedor', lazy=True)
+    pedido = db.relationship('Pedido', backref='pedidos_vendedor', lazy=True)
 
     def handle_form(self, form):
         self.id_empleado = form.id_empleado.data
@@ -43,7 +43,7 @@ class Repventa(db.Model):
         self.edad = form.edad.data
 
         if form.id_oficina.data == -1:
-            pass
+            self.id_oficina=None
 
         else:
             self.id_oficina = form.id_oficina.data

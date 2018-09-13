@@ -28,11 +28,6 @@ db = SQLAlchemy(app)
 
 
 
-# db.engine.execute('PRAGMA foreign_keys = ON;')
-
-
-
-
 # noinspection PyUnresolvedReferences
 # My Logic
 from restfullflask import routes
