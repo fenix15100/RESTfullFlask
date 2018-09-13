@@ -11,7 +11,7 @@ class Repventa(db.Model):
 
     id_oficina = db.Column(db.INTEGER,
                            db.ForeignKey('oficina.id_oficina',name='fk_repventas_id_oficina_oficina',
-                                         ondelete="SET NULL", onupdate="CASCADE",deferrable=True))
+                                         ondelete="SET NULL", onupdate="CASCADE"))
 
     titulo = db.Column(db.String(10))
 
@@ -20,7 +20,7 @@ class Repventa(db.Model):
 
     id_director = db.Column(db.INTEGER,
                             db.ForeignKey("repventa.id_empleado",name='fk_repventas_director_repventas',
-                                          ondelete="RESTRICT", onupdate="CASCADE",deferrable=True))
+                                          ondelete="RESTRICT", onupdate="CASCADE"))
 
     cuota = db.Column(db.DECIMAL(precision=8, scale=2),
                       CheckConstraint('cuota>=0',name='chk_repventas_cuota'))
@@ -52,7 +52,7 @@ class Repventa(db.Model):
         self.contrato = form.contrato.data
 
         if form.id_director.data == -1:
-            pass
+            self.id_director=None
 
         else:
             self.id_director = form.id_director.data

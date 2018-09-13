@@ -17,7 +17,7 @@ class Oficina(db.Model):
     ventas = db.Column(db.DECIMAL(precision=9, scale=2),
                        CheckConstraint('ventas>=0'), nullable=False)
 
-    repventas = db.relationship('Repventa', backref='repventas_oficina', lazy=True)
+    repventas = db.relationship('Repventa', backref='repventas_oficina',cascade="all,delete",passive_updates=True, lazy=True)
 
     """
     Instance model Oficina from fields of form

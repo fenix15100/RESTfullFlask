@@ -72,12 +72,12 @@ def delete(id_empleado):
         try:
             try:
                 if repventa.isdirector():
-                    raise ValueError("Violada Clave Ajena: fk_repventas_director_repventas ON DELETE RESTRICT ON UPDATE CASCADE")
+                    raise ValueError(
+                        "Violada Clave Ajena: fk_repventas_director_repventas ON DELETE RESTRICT ON UPDATE CASCADE")
             except ValueError as e:
                 db.session.rollback()
-                flash(repr(e))
+                flash(repr(e.args))
                 return redirect(url_for('repventaController.show_all'))
-
 
             db.session.delete(repventa)
             db.session.commit()

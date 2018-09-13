@@ -39,6 +39,14 @@ class RepventaForm(Form):
         self.id_director.choices = [(-1, "---")] + [(repventa.id_empleado, repventa.nombre) for repventa in
                                                     db.session.query(Repventa).all()]
 
-    # TODO Implement method
+
     def populateform(self, repventa: Repventa):
-        pass
+        self.id_empleado.data=repventa.id_empleado
+        self.nombre.data=repventa.nombre
+        self.id_oficina.data=repventa.id_oficina
+        self.id_director.data=repventa.id_director
+        self.edad.data=repventa.edad
+        self.contrato.data=repventa.contrato
+        self.ventas.data=repventa.ventas
+        self.cuota.data=repventa.cuota
+        self.titulo.data=repventa.titulo
