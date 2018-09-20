@@ -11,25 +11,7 @@ from restfullflask import db
 
 
 
-
-
-class Cliente(db.Model):
-    id_cliente = db.Column(db.INTEGER, primary_key=True)
-
-    empresa = db.Column(db.String(20), nullable=False)
-
-    id_vendedor = db.Column(db.INTEGER,
-                            db.ForeignKey('repventa.id_empleado',
-                                          ondelete="RESTRICT", onupdate="CASCADE"), nullable=False)
-
-    limite_credito = db.Column(db.DECIMAL(precision=8, scale=2),
-                               CheckConstraint('limite_credito>0 and limite_credito<120000'))
-
-    pedidos = db.relationship('Pedido', backref='pedidos_cliente', lazy=True)
-
-    def __repr__(self):
-        return '<Cliente %r>' % self.id_cliente + "_" + self.empresa
-
+# FIXME refactor backref en todos los modelos para que tengan nombres coherentes
 
 class Pedido(db.Model):
     id_pedido = db.Column(db.INTEGER, primary_key=True)
