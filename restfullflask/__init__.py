@@ -9,8 +9,6 @@ from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 
 # Configuration Flask APP
-project_dir = os.path.dirname(os.path.realpath(__file__))
-#app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(project_dir, "mydb.db")
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:1234@localhost:5432/training"
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
