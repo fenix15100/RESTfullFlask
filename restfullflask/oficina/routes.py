@@ -1,11 +1,13 @@
 from flask import render_template, Blueprint, request, redirect, flash, url_for
+from sqlalchemy.exc import IntegrityError,DataError
+
 from restfullflask.oficina.models import db, Oficina
 from restfullflask.oficina.forms import OficinaForm
 
 """
 Oficina BluePrint
 """
-
+#FIXME Controlar la integridad de la base de datos y otras excepciones
 oficinaController = Blueprint('oficinaController', __name__, template_folder='templates/')
 
 
@@ -26,10 +28,20 @@ def add():
     if request.method == 'POST' and form.validate():
         oficina = Oficina()
         oficina.handle_form(form)
-        db.session.add(oficina)
-        db.session.commit()
-        flash('Oficina Added!')
-        return redirect(url_for('oficinaController.show_all'))
+
+
+        try:
+            db.session.add(oficina)
+            db.session.commit()
+            flash('Oficina Added!')
+            return redirect(url_for('oficinaController.show_all'))
+
+        except IntegrityError as e:
+            db.session.rollback()
+            flash(e)
+        except DataError as e:
+            db.session.rollback()
+            flash(e)
 
     return render_template('oficina_add.html', form=form)
 

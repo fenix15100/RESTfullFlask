@@ -12,12 +12,12 @@ class Oficina(db.Model):
     director = db.Column(db.INTEGER)
 
     objetivo = db.Column(db.DECIMAL(precision=9, scale=2),
-                         CheckConstraint('objetivo>=0'))
+                         CheckConstraint('objetivo>=0',name="chk_oficina_objetivo"))
 
     ventas = db.Column(db.DECIMAL(precision=9, scale=2),
-                       CheckConstraint('ventas>=0'), nullable=False)
+                       CheckConstraint('ventas>=0',name="chk_oficina_ventas"), nullable=False)
 
-    repventas = db.relationship('Repventa', backref='repventas_oficina',cascade="all,delete",passive_updates=True, lazy=True)
+    repventas = db.relationship('Repventa', backref='oficina_repventas',cascade="all,delete",passive_updates=True, lazy=True)
 
     """
     Instance model Oficina from fields of form

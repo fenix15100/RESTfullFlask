@@ -9,13 +9,13 @@ class Cliente(db.Model):
     empresa = db.Column(db.String(20), nullable=False)
 
     id_vendedor = db.Column(db.INTEGER,
-                            db.ForeignKey('repventa.id_empleado',
+                            db.ForeignKey('repventa.id_empleado',name="fk_clientes_repventas",
                                           ondelete="RESTRICT", onupdate="CASCADE"), nullable=False)
 
     limite_credito = db.Column(db.DECIMAL(precision=8, scale=2),
-                               CheckConstraint('limite_credito>0 and limite_credito<120000'))
+                               CheckConstraint('limite_credito>0 and limite_credito<120000',name="chk_cliente_limite__credito"))
 
-    pedidos = db.relationship('Pedido', backref='clientes_pedido', lazy=True)
+    pedidos = db.relationship('Pedido', backref='cliente_pedidos', lazy=True)
 
     def __repr__(self):
         return '<cliente %r>' % self.id_cliente + "_" + self.empresa

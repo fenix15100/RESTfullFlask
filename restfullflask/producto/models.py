@@ -10,15 +10,15 @@ class Producto(db.Model):
     descripcion = db.Column(db.TEXT, nullable=False)
 
     precio = db.Column(db.DECIMAL(precision=7, scale=2),
-                       CheckConstraint('precio>0'), nullable=False)
+                       CheckConstraint('precio>0',name="chk_productos_precio"), nullable=False)
     existencias = db.Column(db.INTEGER,
-                            CheckConstraint('existencias>=0'), nullable=False)
+                            CheckConstraint('existencias>=0',name="chk_productos_existencias"), nullable=False)
 
     pedidos = db.relationship('Pedido', backref='pedidos_producto', lazy=True)
 
     """
-        Instance model Producto from fields of form
-        """
+    Instance model Producto from fields of form
+    """
 
     def handle_form(self, form):
         self.id_fab = form.id_fab.data
